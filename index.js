@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // CORS POLICY
 app.use((req, res, next) => {
-    const allowedOrigins = ['http://localhost:3000', 'https://app.raingames.xyz' , 'http://localhost:5173' , 'https://rain-chess.on.fleek.co'] ;
+    const allowedOrigins = ['*'] ;
     const origin = req.headers.origin;
     if (allowedOrigins.includes(origin)) {
         res.setHeader('Access-Control-Allow-Origin', origin);
@@ -53,7 +53,7 @@ app.use('*', (req, res) => {
     res.status(404).sendFile('views/404.html', { root: __dirname })
 })
 
-app.listen(process.env.PORT || PORT, 'localhost')
+app.listen(process.env.PORT || PORT, '0.0.0.0')
 
 module.exports = app
 
