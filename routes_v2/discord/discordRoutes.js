@@ -2,10 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 
-// var Helper = {
-//     Auth: require('../../utils/auth'), 
-   
-// }
+
 
 var Controller = {
     DiscordController: require('../../controllers_v2/discord/controllers')
@@ -19,26 +16,12 @@ router.post(
 ) 
 
 router.post(
-    '/api/v2/computeWin' ,
-    Controller.DiscordController.computeWin
+    '/api/v2/computeGame' ,
+    Controller.DiscordController.computeGame
 )
 
 
 
-// router.post(
-//     '/api/v2/verifyGame',  
-//     Controller.DiscordController.gameVerify
-// ); 
-
-// router.post(
-//     '/api/v2/verifyChessTurns',  
-//     Controller.DiscordController.chessTurnsVerify
-// ); 
-
-// router.post(
-//     '/api/v2/verifyChessGame',  
-//     Controller.DiscordController.chessGameVerify
-// ); 
 
 
  

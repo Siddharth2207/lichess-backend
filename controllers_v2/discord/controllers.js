@@ -1,17 +1,18 @@
 
 const asyncHandler = require("express-async-handler");
 
-const axios = require('axios') 
-const Request = require("request"); 
+
 let lichess = require('lichess-api') 
-const { tall } = require('tall')
 
+const dotenv = require('dotenv');
+dotenv.config();
 
-// Verifu Contract initated with signer
-let { Verify } = require("rain-sdk") 
+ 
 const {ethers} = require('ethers'); 
-const { request, response } = require("express");
-// let wallet = new ethers.Wallet('9fb5526fd6cb68eef6f93da85d0e69d7ffecd17b76b4381574d4daf2f11a945d', provider); 
+
+
+const provider = new ethers.providers.JsonRpcProvider('https://matic-mumbai.chainstacklabs.com')
+let wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider); 
  
 
 
@@ -20,23 +21,16 @@ const { request, response } = require("express");
 
 exports.processGame = asyncHandler(async (request,response) => {  
 
-     // sample computed data from backend
-    //  let gameData = {  
-    //     gameId : gameIdNumber , 
-    //     isbeatenGM : false , // winner 
-    //     winnersAddress : '0xD09c80BD55FcA5a3B2407106b65f6ab82E871F21' , 
-    //     XPPoints : 10 , 
-    //     beatenBetterPlayer : true
-    //   }   
-  
 
     try { 
 
-        const { gameId } = request.body;   
+        const { gameId , winnerAddress  } = request.body;   
         let gameData, whitePlayerData , blackPlayerData 
-        let signingObject = []
+        let signingObject = [] 
+        let botAddress = await wallet.getAddress() 
+        console.log(botAddress)
         
-        lichess.game(gameId, function (err, game) {  
+        lichess.game(gameId, async function (err, game) {  
             //get game data . 
 
             if(!err){ 
@@ -51,7 +45,7 @@ exports.processGame = asyncHandler(async (request,response) => {
                         whitePlayerData = JSON.parse(user);  
                         console.log(whitePlayerData)
 
-                        lichess.user(gameData.players.black.userId, function (err, user) { 
+                        lichess.user(gameData.players.black.userId, async  function (err, user) { 
                             if(err){
                                 return response.status(500).send({ status: false, code: 500, message: "Failed to create" })
                             }else{
@@ -69,9 +63,27 @@ exports.processGame = asyncHandler(async (request,response) => {
                                     whitePlayerData.title == 'GM' ? signingObject.push(1): signingObject.push(0) 
                                     gameData.players.black.rating > gameData.players.white.rating ? signingObject.push(1): signingObject.push(0) 
                                     signingObject.push('100000000000000000000')  
-                                } 
+                                }  
 
-                                return response.status(200).send({ status: true, code: 200, data : signingObject })
+
+                                
+
+                                // to do : verify winner address from subgraph 
+                                const context = [winnerAddress , 1, 1, signingObject[2]] 
+                                const messageHash = ethers.utils.solidityKeccak256(['uint256[]'], [context]);   
+
+
+                               
+                                const botSig = await wallet.signMessage(ethers.utils.arrayify(messageHash))
+                                const signedContext = {
+                                    signer: botAddress, // bot adddress  
+                                    signature: botSig, // bot sig 
+                                    context: context
+                                }   
+
+                                console.log( "signedContext : " , signedContext )
+
+                                return response.status(200).send({ status: true, code: 200, data : signedContext })
 
 
 
@@ -96,7 +108,7 @@ exports.processGame = asyncHandler(async (request,response) => {
     }
 }) 
 
-exports.computeWin = asyncHandler(async (request,response) => {  
+exports.computeGame = asyncHandler(async (request,response) => {  
 
    
 
@@ -134,12 +146,15 @@ exports.computeWin = asyncHandler(async (request,response) => {
                                    
                                    blackPlayerData.title == 'GM' ? signingObject["GM"] = 1 : signingObject["GM"] = 0
                                    gameData.players.white.rating > gameData.players.black.rating ? signingObject["IMPRV"] = 1 : signingObject["IMPRV"] = 0
-                                   signingObject["XP"] = 100 // to be computed 
+                                   signingObject["XP"] = 100 // to be computed  
+                                   signingObject["WIN"] = 1
 
                                }else if(gameData.winner == 'black'){ 
                                    whitePlayerData.title == 'GM' ? signingObject["GM"] = 1 : signingObject["GM"] = 0
                                    gameData.players.black.rating > gameData.players.white.rating ? signingObject["IMPRV"] = 1 : signingObject["IMPRV"] = 0
-                                   signingObject["XP"] = 100 
+                                   signingObject["XP"] = 100  
+                                   signingObject["WIN"] = 1
+
                                } 
 
                                return response.status(200).send({ status: true, code: 200, data : signingObject })
