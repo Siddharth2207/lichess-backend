@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "node index.js",
     "test": "mocha 'test/**/*.js' --timeout 100000 --exit"
   },
   "dependencies": {
@@ -17,6 +17,7 @@
     "express-validator": "^6.14.0",
     "lichess-api": "^1.0.2",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15" 
+    
   }
 }

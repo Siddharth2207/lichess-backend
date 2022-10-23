@@ -69,7 +69,7 @@ exports.processGame = asyncHandler(async (request,response) => {
                                 
 
                                 // to do : verify winner address from subgraph 
-                                const context = [winnerAddress , 1, 1, signingObject[2]] 
+                                const context = [winnerAddress , signingObject[0], signingObject[1], signingObject[2]] 
                                 const messageHash = ethers.utils.solidityKeccak256(['uint256[]'], [context]);   
 
 

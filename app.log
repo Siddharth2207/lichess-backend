@@ -3,3 +3,9 @@
 [0mPOST /api/v2/processGame [32m200[0m 2694.197 ms - 321[0m
 [0mPOST /api/v2/computeGame [32m200[0m 3718.326 ms - 69[0m
 [0mPOST /api/v2/computeGame [32m200[0m 2943.196 ms - 69[0m
+[0mPOST /api/v2/computeGame [32m200[0m 2690.879 ms - 69[0m
+[0mPOST /api/v2/processGame [32m200[0m 4589.287 ms - 321[0m
+[0mPOST /api/v2/computeGame [32m200[0m 2157.749 ms - 69[0m
+[0mPOST /api/v2/processGame [32m200[0m 2090.335 ms - 321[0m
+[0mPOST /api/v2/computeGame [32m200[0m 2132.597 ms - 69[0m
+[0mPOST /api/v2/processGame [32m200[0m 2479.625 ms - 321[0m
