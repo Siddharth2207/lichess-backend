@@ -53,7 +53,7 @@ app.use('*', (req, res) => {
     res.status(404).sendFile('views/404.html', { root: __dirname })
 })
 
-app.listen(process.env.PORT || PORT, '0.0.0.0')
+app.listen(process.env.PORT || PORT)
 
 module.exports = app
 
