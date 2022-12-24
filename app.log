@@ -1,2 +1,4 @@
 [0mPOST /lichess/api/v2/verifyAccount [32m200[0m 2207.501 ms - 62[0m
 [0mPOST /lichess/api/v2/getNftContext [32m200[0m 2187.545 ms - 370[0m
+[0mPOST /lichess/api/v2/verifyAccount [32m200[0m 1279.005 ms - 62[0m
+[0mPOST /lichess/api/v2/getNftContext [32m200[0m 1308.914 ms - 370[0m
