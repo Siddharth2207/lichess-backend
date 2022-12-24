@@ -7,7 +7,6 @@ dotenv.config()
 const provider = new ethers.providers.JsonRpcProvider(process.env.RPC_URL)
 const pinata = pinataSDK(process.env.PINATA_KEY, process.env.PINATA_SECRET)
 const API_KEY = `${process.env.API_KEY}`
-const SECRET_KEY = `${process.env.SECRET_KEY}`
 const EXPIRY_TIME = `${process.env.EXPIRY_TIME}`
 
 // =================== ADDRESS CACHING
@@ -200,7 +199,6 @@ module.exports = {
   constants,
   provider,
   API_KEY,
-  SECRET_KEY,
   EXPIRY_TIME,
   pinata,
   addressCache,

@@ -2,3 +2,8 @@
 [0mPOST /lichess/api/v2/getNftContext [32m200[0m 2187.545 ms - 370[0m
 [0mPOST /lichess/api/v2/verifyAccount [32m200[0m 1279.005 ms - 62[0m
 [0mPOST /lichess/api/v2/getNftContext [32m200[0m 1308.914 ms - 370[0m
+[0mGET /lichess/api/v2/verifyAccount [33m404[0m 21.056 ms - 239[0m
+[0mGET /lichess/api/v2/verifyAccount [33m404[0m 7.265 ms - 239[0m
+[0mGET /lichess/api/v2/verifyAccount [33m404[0m 1.283 ms - 239[0m
+[0mGET /lichess/api/v2/verifyAccount [33m404[0m 20.743 ms - 1788[0m
+[0mPOST /lichess/api/v2/verifyAccount [32m200[0m 1071.612 ms - 62[0m

@@ -74,8 +74,15 @@ app.use('*', (req, res) => {
     res.status(404).sendFile('views/404.html', { root: __dirname })
 })
 
-app.listen(process.env.PORT || PORT, 'localhost')
+
+app.listen(process.env.PORT || PORT , err => {
+    if (err) console.error(err);
+    console.log('Server started on :' , process.env.PORT );
+  }); 
+
+
+// app.listen(process.env.PORT || PORT, 'localhost')
 
 module.exports = app
 
-console.log("App initialized")
+// console.log("App initialized")
