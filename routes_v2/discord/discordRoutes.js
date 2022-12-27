@@ -13,7 +13,7 @@ var Controller = {
 
 
 router.post(
-    '/lichess/api/v2/processGame' ,
+    '/lichess/api/v2/processGame' , 
     Controller.DiscordController.processGame 
 
 ) 

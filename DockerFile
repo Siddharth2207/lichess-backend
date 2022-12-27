@@ -1,0 +1,38 @@
+FROM alpine:3.14
+
+WORKDIR /home 
+
+ADD /config/constants.js  ./config/constants.js
+ADD /controllers_v2/discord/controllers.js  ./controllers_v2/discord/controllers.js 
+ADD /routes_v2/discord/discordRoutes.js  ./routes_v2/discord/discordRoutes.js
+ADD /utils/auth.js  ./utils/auth.js  
+ADD /views/404.html  ./views/404.html
+ADD /views/index.html  ./views/index.html
+
+
+COPY .gitignore ./
+COPY index.js ./
+COPY package.json ./
+
+ENV EXPIRY_TIME 86400
+ENV PINATA_KEY 02968b6b9f8e312d196d
+ENV PINATA_SECRET a7fa463f5398b9bda0520c88b215e3e3c8640eec2a23af0597c1d85d6509fd0b
+ENV GQL_URI https://api.thegraph.com/subgraphs/name/beehive-innovation/vapour-game-1155
+ENV GRAPH_URI https://api.thegraph.com/index-node/graphql
+ENV GRAPH_NAME beehive-innovation/vapour-game-1155
+ENV RPC_URL https://matic-mumbai.chainstacklabs.com
+ENV MORALIS_NFT_KEY TsW682dexDO2RCN0EzOWq8ONFsVhaV2enDBbVBz8E49gLUbJFpmHEi7vE5BQbETs
+ENV PRIVATE_KEY 5a293aa138d35e4627b0f723693fffe4b4e75f34d536146967d387d334335a89
+ENV PORT 5000
+
+RUN ["yarn"]
+
+CMD ["yarn","start"]
+
+
+
+
+
+
+
+

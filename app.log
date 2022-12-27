@@ -7,3 +7,8 @@
 [0mGET /lichess/api/v2/verifyAccount [33m404[0m 1.283 ms - 239[0m
 [0mGET /lichess/api/v2/verifyAccount [33m404[0m 20.743 ms - 1788[0m
 [0mPOST /lichess/api/v2/verifyAccount [32m200[0m 1071.612 ms - 62[0m
+[0mGET / [32m200[0m 5.186 ms - 1768[0m
+[0mGET /favicon.ico [33m404[0m 5.877 ms - 1788[0m
+[0mGET / [32m200[0m 5.699 ms - 1659[0m
+[0mGET /ajcbnas [33m404[0m 5.994 ms - 1690[0m
+[0mGET / [36m304[0m 1.652 ms - -[0m
